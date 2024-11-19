@@ -1,27 +1,27 @@
-import React from 'react';
+import React from "react";
 
-const TaskList = ({ tasks, toggleTaskCompletion, editTask, deleteTask }) => {
-  const handleEdit = (id) => {
-    const newText = prompt('Edit task:', tasks.find(task => task.id === id)?.text);
-    if (newText) editTask(id, newText);
-  };
-
-  return (
-    <ul>
-      {tasks.map(task => (
-        <li key={task.id} style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => toggleTaskCompletion(task.id)}
-          />
-          {task.text}
-          <button onClick={() => handleEdit(task.id)}>Edit</button>
-          <button onClick={() => deleteTask(task.id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
-  );
+const TaskList = ({ tasks, onToggle, onDelete, onEdit }) => {
+    return (
+        <ul className="task-list">
+            {tasks.map((task) => (
+                <li key={task.id} className={task.completed ? "completed" : ""}>
+                    <input
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={() => onToggle(task.id)}
+                    />
+                    <span
+                        contentEditable
+                        suppressContentEditableWarning
+                        onBlur={(e) => onEdit(task.id, e.target.textContent)}
+                    >
+                        {task.name}
+                    </span>
+                    <button onClick={() => onDelete(task.id)}>Delete</button>
+                </li>
+            ))}
+        </ul>
+    );
 };
 
 export default TaskList;
