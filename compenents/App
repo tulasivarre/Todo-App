@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AddTask from "./main/AddTask";
-import TaskList from "./main/TaskList";
-import FilterTasks from "./main/FilterTasks";
+import AddTask from "./components/AddTask";
+import TaskList from "./components/TaskList";
+import FilterTasks from "./components/FilterTasks";
 import "./styles.css";
 
 const App = () => {
